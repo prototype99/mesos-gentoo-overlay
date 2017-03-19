@@ -4,6 +4,8 @@
 
 EAPI=5
 
+inherit autotools
+
 DESCRIPTION="a cluster manager that provides efficient resource isolation and sharing across distributed applications"
 HOMEPAGE="http://mesos.apache.org/"
 SRC_URI="http://archive.apache.org/dist/${PN}/${PV}/${P}.tar.gz"
