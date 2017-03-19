@@ -38,7 +38,13 @@ src_prepare() {
 
 src_configure() {
 	export PROTOBUF_JAR=/usr/share/protobuf/lib/protobuf.jar
-	econf $(use_enable python) $(use_enable java) --with-protobuf=/usr --with-boost=/usr --with-zookeeper=/usr --with-leveldb=/usr
+	econf $(use_enable python) $(use_enable java) \
+		--with-protobuf=/usr \
+		--with-leveldb=/usr \
+		--with-zookeeper=/usr \
+		--with-glog=/usr \
+		--with-apr=/usr \
+		--with-svn=/usr
 }
 
 src_compile() {
