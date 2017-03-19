@@ -2,7 +2,7 @@
 <!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
 <repositories xmlns="" version="1.0">
   <repo quality="experimental" status="unofficial">
-    <name>kdomanski</name>
+    <name>drcrallen</name>
     <description>Kamil Domański's overlay as modified by Charles Allen</description>
     <homepage>https://github.com/drcrallen/drcrallen-overlay</homepage>
     <owner>
