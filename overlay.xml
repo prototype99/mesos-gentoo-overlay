@@ -3,15 +3,15 @@
 <repositories xmlns="" version="1.0">
   <repo quality="experimental" status="unofficial">
     <name>kdomanski</name>
-    <description>Kamil Domański's overlay</description>
-    <homepage>https://github.com/kdomanski/gentoo-overlay</homepage>
+    <description>Kamil Domański's overlay as modified by Charles Allen</description>
+    <homepage>https://github.com/drcrallen/drcrallen-overlay</homepage>
     <owner>
-      <email>github@domanski.co</email>
-      <name>Kamil Domański</name>
+      <email>charles@allen-net.com</email>
+      <name>Charles Allen</name>
     </owner>
-    <source type="git">https://github.com/kdomanski/gentoo-overlay.git</source>
-    <source type="git">git@github.com:kdomanski/gentoo-overlay.git</source>
-    <feed>https://github.com/kdomanski/gentoo-overlay/commits/master.atom</feed>
+    <source type="git">https://github.com/drcrallen/drcrallen-overlay.git</source>
+    <source type="git">git@github.com:drcrallen/drcrallen-overlay.git</source>
+    <feed>https://github.com/drcrallen/drcrallen-overlay/commits/master.atom</feed>
   </repo>
 </repositories>
 
