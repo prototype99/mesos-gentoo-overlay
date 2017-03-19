@@ -15,7 +15,7 @@ KEYWORDS=""
 IUSE="java python"
 SLOT="0"
 
-DEPEND=	dev-cpp/glog
+DEPEND="dev-cpp/glog
 	dev-java/maven-bin
 	net-misc/curl
 	dev-libs/cyrus-sasl
