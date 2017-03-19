@@ -13,7 +13,7 @@ RESTRICT="mirror"
 
 LICENSE="Apache-2.0"
 KEYWORDS="~amd64"
-IUSE="java python"
+IUSE="java python network-isolator"
 SLOT="0"
 
 DEPEND="dev-cpp/glog
@@ -26,13 +26,15 @@ DEPEND="dev-cpp/glog
 	dev-vcs/subversion
 	>=dev-libs/protobuf-2.5.0[java,python]
 	python? ( dev-lang/python dev-python/boto )
-	java? ( virtual/jdk )"
+	java? ( virtual/jdk )
+	network-isolator? (>=dev-libs/libnl-3.2.28)"
 
 S="${WORKDIR}/${P}"
 
 src_configure() {
 	export PROTOBUF_JAR=/usr/share/protobuf/lib/protobuf.jar
 	econf $(use_enable python) $(use_enable java) \
+		$(with_enable network-isolator)
 		--with-protobuf=/usr \
 		--with-leveldb=/usr \
 		--with-zookeeper=/usr \
