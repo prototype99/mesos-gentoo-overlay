@@ -27,14 +27,14 @@ DEPEND="dev-cpp/glog
 	>=dev-libs/protobuf-2.5.0[java,python]
 	python? ( dev-lang/python dev-python/boto )
 	java? ( virtual/jdk )
-	network-isolator? (>=dev-libs/libnl-3.2.28)"
+	network-isolator? ( >=dev-libs/libnl-3.2.28 )"
 
 S="${WORKDIR}/${P}"
 
 src_configure() {
 	export PROTOBUF_JAR=/usr/share/protobuf/lib/protobuf.jar
 	econf $(use_enable python) $(use_enable java) \
-		$(with_enable network-isolator)
+		$(with_enable network-isolator) \
 		--with-protobuf=/usr \
 		--with-leveldb=/usr \
 		--with-zookeeper=/usr \
