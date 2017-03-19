@@ -15,61 +15,34 @@ IUSE="java python"
 SLOT="0"
 
 DEPEND="dev-cpp/glog
-        dev-java/maven-bin
-        net-misc/curl
-        dev-libs/cyrus-sasl
-        dev-libs/apr
-        dev-libs/leveldb
-        sys-cluster/zookeeper
-        dev-vcs/subversion
-        >=dev-libs/protobuf-2.5.0[java,python]
-        python? ( dev-lang/python dev-python/boto )
-        java? ( virtual/jdk )"
+	dev-java/maven-bin
+	net-misc/curl
+	dev-libs/cyrus-sasl
+	dev-libs/apr
+	dev-libs/leveldb
+	sys-cluster/zookeeper
+	dev-vcs/subversion
+	>=dev-libs/protobuf-2.5.0[java,python]
+	python? ( dev-lang/python dev-python/boto )
+	java? ( virtual/jdk )"
 
 S="${WORKDIR}/${P}"
 
 src_configure() {
-#    cd "${S}/build"
 	export PROTOBUF_JAR=/usr/share/protobuf/lib/protobuf.jar
-    econf $(use_enable python) $(use_enable java) \
-          --with-protobuf=/usr \
-          --with-leveldb=/usr \
-          --with-zookeeper=/usr \
-          --with-glog=/usr \
-          --with-apr=/usr \
-          --with-svn=/usr
+	econf $(use_enable python) $(use_enable java) \
+		--with-protobuf=/usr \
+		--with-leveldb=/usr \
+		--with-zookeeper=/usr \
+		--with-glog=/usr \
+		--with-apr=/usr \
+		--with-svn=/usr
 }
 
 src_compile() {
-#    cd "${S}/build"
-    emake || "emake failed"
+	emake
 }
 
 src_install() {
-#    cd "${S}/build"
-    emake DESTDIR="${T}/image" install || die "emake install failed"
-    
-#    dodir /usr/bin
-    exeinto /usr/bin
-    doexe ${T}/image/usr/bin/*
-
-    dolib.so ${T}/image/usr/lib64/*-${PV}.so
-
-    dodir /usr/libexec/mesos
-    exeinto /usr/libexec/mesos
-    doexe ${T}/image/usr/libexec/mesos/mesos-*
-    insinto /usr/libexec/mesos
-    dodir /usr/libexec/mesos/python/mesos
-    insinto /usr/libexec/mesos/python/mesos
-    doins ${T}/image/usr/libexec/mesos/python/mesos/*
-
-    into /usr
-    dosbin ${T}/image/usr/sbin/*
-
-    dodir /usr/share/mesos
-    cp -R ${T}/image/usr/share/mesos/* ${D}/usr/share/mesos/ || die "Can not install /usr/share/mesos/*"
-
-    dodir /etc/mesos
-    insinto /etc/mesos
-    doins ${T}/image/etc/mesos/*
+	emake DESTDIR="${D}" install
 }
