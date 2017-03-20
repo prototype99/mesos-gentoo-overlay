@@ -12,7 +12,7 @@ SRC_URI="http://archive.apache.org/dist/${PN}/${PV}/${P}.tar.gz"
 RESTRICT="mirror"
 
 LICENSE="Apache-2.0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86 ~arm64"
 IUSE="java python network-isolator perftools"
 SLOT="0"
 
@@ -21,7 +21,9 @@ DEPEND="dev-cpp/glog
 	net-misc/curl
 	dev-libs/cyrus-sasl
 	dev-libs/apr
+	dev-cpp/picojson
 	dev-libs/leveldb
+	dev-libs/cyrus-sasl
 	sys-cluster/zookeeper
 	dev-vcs/subversion
 	>=dev-libs/protobuf-2.5.0[java,python]
@@ -38,10 +40,11 @@ src_configure() {
 		--enable-optimize \
 		--with-protobuf=/usr \
 		--with-leveldb=/usr \
-		--with-zookeeper=/usr \
 		--with-glog=/usr \
 		--with-apr=/usr \
-		--with-svn=/usr
+		--with-svn=/usr \
+		--with-sasl=/usr \
+		--with-picojson=/usr
 }
 
 src_compile() {
