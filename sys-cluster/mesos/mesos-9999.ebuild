@@ -15,16 +15,16 @@ KEYWORDS="~amd64 ~x86 ~arm64"
 IUSE="network-isolator perftools"
 SLOT="0"
 
-DEPEND="dev-cpp/glog
+DEPEND="dev-libs/apr
         net-misc/curl
-        dev-cpp/picojson
-        dev-libs/cyrus-sasl[ssl]
-        dev-libs/apr
-        dev-libs/libev
+        dev-cpp/glog
         dev-libs/leveldb
+        dev-libs/libev
+        network-isolator? ( dev-libs/libnl )
+        dev-cpp/picojson
         dev-libs/protobuf
-        dev-vcs/subversion
-        network-isolator? ( dev-libs/libnl )"
+        dev-libs/cyrus-sasl
+        dev-vcs/subversion"
 
 S="${WORKDIR}/${P}"
 
@@ -42,15 +42,16 @@ src_configure() {
                 --disable-python \
                 --disable-java \
                 --enable-optimize \
-                --with-protobuf=/build/amd64-usr/usr \
-                --with-leveldb=/build/amd64-usr/usr \
-                --with-glog=/build/amd64-usr/usr \
                 --with-apr=/build/amd64-usr/usr \
-                --with-svn=/build/amd64-usr/usr \
-                --with-sasl=/build/amd64-usr/usr \
-                --with-picojson=/build/amd64-usr/usr \
                 --with-curl=/build/amd64-usr/usr \
-                --with-nl=/build/amd64-usr/usr
+                --with-glog=/build/amd64-usr/usr \
+                --with-libev=/build/amd64-usr/usr \
+                --with-leveldb=/build/amd64-usr/usr \
+                --with-nl=/build/amd64-usr/usr \
+                --with-picojson=/build/amd64-usr/usr \
+                --with-protobuf=/build/amd64-usr/usr \
+                --with-sasl=/build/amd64-usr/usr \
+                --with-svn=/build/amd64-usr/usr
 }
 
 src_compile() {
