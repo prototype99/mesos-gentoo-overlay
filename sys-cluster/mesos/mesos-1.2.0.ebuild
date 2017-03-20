@@ -13,7 +13,7 @@ RESTRICT="mirror"
 
 LICENSE="Apache-2.0"
 KEYWORDS="~amd64"
-IUSE="java python network-isolator"
+IUSE="java python network-isolator perftools"
 SLOT="0"
 
 DEPEND="dev-cpp/glog
@@ -33,8 +33,9 @@ S="${WORKDIR}/${P}"
 
 src_configure() {
 	export PROTOBUF_JAR=/usr/share/protobuf/lib/protobuf.jar
-	econf $(use_enable python) $(use_enable java) \
+	econf $(use_enable python) $(use_enable java) $(use_enable perftools) \
 		$(with_enable network-isolator) \
+		--enable-optimize \
 		--with-protobuf=/usr \
 		--with-leveldb=/usr \
 		--with-zookeeper=/usr \
