@@ -5,7 +5,7 @@
 EAPI=5
 inherit git-2 autotools
 
-EGIT_REPO_URI="git://git.apache.org/mesos.git"
+EGIT_REPO_URI="https://github.com/drcrallen/mesos.git"
 
 DESCRIPTION="a cluster manager that provides efficient resource isolation and sharing across distributed applications"
 HOMEPAGE="http://mesos.apache.org/"
@@ -16,7 +16,6 @@ IUSE="network-isolator perftools"
 SLOT="0"
 
 DEPEND="dev-cpp/glog
-        net-libs/http-parser
         net-misc/curl
         dev-cpp/picojson
         dev-libs/cyrus-sasl[ssl]
@@ -37,9 +36,6 @@ src_configure() {
         # See https://www.mail-archive.com/user@mesos.apache.org/msg04222.html
         export SASL_PATH=/build/amd64-usr/usr/lib/sasl2
         export LD_LIBRARY_PATH=/build/amd64-usr/usr/lib:$LD_LIBRARY_PATH
-        use network-isolator perftools
-	# default is x86_64-pc-linux-gnu and x86_64-cross-linux-gnu... which counts as cross-compiling
-	# then ./configure will fail
         econf --build=x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu \
                 $(use_enable perftools) \
                 $(use_with network-isolator) \
@@ -53,9 +49,8 @@ src_configure() {
                 --with-svn=/build/amd64-usr/usr \
                 --with-sasl=/build/amd64-usr/usr \
                 --with-picojson=/build/amd64-usr/usr \
-                --with-nl=/build/amd64-usr/usr \
-                --with-http-parser=/build/amd64-usr/usr \
-                --with-libev=/build/amd64-usr/usr
+                --with-curl=/build/amd64-usr/usr \
+                --with-nl=/build/amd64-usr/usr
 }
 
 src_compile() {
