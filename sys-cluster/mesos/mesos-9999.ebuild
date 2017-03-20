@@ -11,46 +11,58 @@ DESCRIPTION="a cluster manager that provides efficient resource isolation and sh
 HOMEPAGE="http://mesos.apache.org/"
 
 LICENSE="Apache-2.0"
-KEYWORDS=""
-IUSE="java python"
+KEYWORDS="~amd64 ~x86 ~arm64"
+IUSE="network-isolator perftools"
 SLOT="0"
 
 DEPEND="dev-cpp/glog
-	dev-java/maven-bin
-	net-misc/curl
-	dev-libs/cyrus-sasl
-	dev-libs/apr
-	dev-libs/leveldb
-	dev-vcs/subversion
-	>=dev-libs/protobuf-2.5.0[java,python]
-	python? ( dev-lang/python dev-python/boto )
-	java? ( virtual/jdk )"
+        net-libs/http-parser
+        net-misc/curl
+        dev-cpp/picojson
+        dev-libs/cyrus-sasl[ssl]
+        dev-libs/apr
+        dev-libs/libev
+        dev-libs/leveldb
+        dev-libs/protobuf
+        dev-vcs/subversion
+        network-isolator? ( dev-libs/libnl )"
 
 S="${WORKDIR}/${P}"
 
 src_prepare() {
-	rm -rf $S/3rdparty/leveldb*
-	rm -rf $S/3rdparty/zookeper*
-	rm -rf $s/3rdparty/libprocess/3rdparty/protobuf*
-	rm -rf $s/3rdparty/libprocess/3rdparty/boost*
-	eautoreconf
+        eautoreconf
 }
 
 src_configure() {
-	export PROTOBUF_JAR=/usr/share/protobuf/lib/protobuf.jar
-	econf $(use_enable python) $(use_enable java) \
-		--with-protobuf=/usr \
-		--with-leveldb=/usr \
-		--with-zookeeper=/usr \
-		--with-glog=/usr \
-		--with-apr=/usr \
-		--with-svn=/usr
+        # See https://www.mail-archive.com/user@mesos.apache.org/msg04222.html
+        export SASL_PATH=/build/amd64-usr/usr/lib/sasl2
+        export LD_LIBRARY_PATH=/build/amd64-usr/usr/lib:$LD_LIBRARY_PATH
+        use network-isolator perftools
+	# default is x86_64-pc-linux-gnu and x86_64-cross-linux-gnu... which counts as cross-compiling
+	# then ./configure will fail
+        econf --build=x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu \
+                $(use_enable perftools) \
+                $(use_with network-isolator) \
+                --disable-python \
+                --disable-java \
+                --enable-optimize \
+                --with-protobuf=/build/amd64-usr/usr \
+                --with-leveldb=/build/amd64-usr/usr \
+                --with-glog=/build/amd64-usr/usr \
+                --with-apr=/build/amd64-usr/usr \
+                --with-svn=/build/amd64-usr/usr \
+                --with-sasl=/build/amd64-usr/usr \
+                --with-picojson=/build/amd64-usr/usr \
+                --with-nl=/build/amd64-usr/usr \
+                --with-http-parser=/build/amd64-usr/usr \
+                --with-libev=/build/amd64-usr/usr
 }
 
 src_compile() {
-	emake
+        emake
 }
 
 src_install() {
-	emake DESTDIR="${D}" install
+        emake DESTDIR="${D}" install
 }
+
