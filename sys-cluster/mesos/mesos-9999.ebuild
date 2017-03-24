@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~x86 ~arm64"
 IUSE="network-isolator perftools"
 SLOT="0"
 
-DEPEND="dev-libs/apr
+RDEPEND="dev-libs/apr
         net-misc/curl
         dev-cpp/glog
         dev-libs/leveldb
@@ -25,7 +25,7 @@ DEPEND="dev-libs/apr
         dev-libs/protobuf
         dev-libs/cyrus-sasl
         dev-vcs/subversion"
-
+DEPEND=$RDEPEND
 S="${WORKDIR}/${P}"
 
 src_prepare() {
@@ -56,6 +56,10 @@ src_configure() {
 
 src_compile() {
         emake
+}
+
+src_test() {
+        emake check
 }
 
 src_install() {
