@@ -9,7 +9,6 @@ inherit autotools
 DESCRIPTION="A cluster manager that provides efficient resource isolation and sharing across distributed applications"
 HOMEPAGE="http://mesos.apache.org/"
 SRC_URI="http://archive.apache.org/dist/${PN}/${PV}/${P}.tar.gz"
-RESTRICT="mirror"
 
 LICENSE="Apache-2.0"
 KEYWORDS="~amd64 ~x86"
