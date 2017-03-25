@@ -29,7 +29,7 @@ src_prepare() {
 }
 
 src_configure() {
-        # See https://www.mail-archive.com/user@mesos.apache.org/msg04222.html
+        # See https://issues.apache.org/jira/browse/MESOS-7286
         MESOS_LIB_PREFIX="${EROOT}/usr"
         export SASL_PATH="${MESOS_LIB_PREFIX}/lib/sasl2"
         export LD_LIBRARY_PATH="${MESOS_LIB_PREFIX}/lib:$LD_LIBRARY_PATH"
