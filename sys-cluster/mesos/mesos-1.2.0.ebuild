@@ -24,6 +24,7 @@ DEPEND=$RDEPEND
 
 src_prepare() {
         epatch "${FILESDIR}/mesos-stout-cloexec.patch"
+        epatch "${FILESDIR}/mesos-linux-ns-nosetns.patch"
         eautoreconf
 }
 
