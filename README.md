@@ -1,4 +1,4 @@
-# drcrallen-overlay
+# mesos-gentoo-overlay
 This overlay contains a WORK IN PROGRESS for some items I've been missing in the gentoo portage upstream.
 
 ## Installation - CoreOS
