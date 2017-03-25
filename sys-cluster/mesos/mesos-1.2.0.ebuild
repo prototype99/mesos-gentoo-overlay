@@ -28,9 +28,9 @@ src_prepare() {
 
 src_configure() {
         # See https://www.mail-archive.com/user@mesos.apache.org/msg04222.html
-        export SASL_PATH=/build/amd64-usr/usr/lib/sasl2
-        export LD_LIBRARY_PATH=/build/amd64-usr/usr/lib:$LD_LIBRARY_PATH
-        MESOS_LIB_PREFIX="${DISTDIR}/usr"
+        MESOS_LIB_PREFIX="${EROOT}/usr"
+        export SASL_PATH="${MESOS_LIB_PREFIX}/lib/sasl2"
+        export LD_LIBRARY_PATH="${MESOS_LIB_PREFIX}/lib:$LD_LIBRARY_PATH"
         MESOS_CONF_ARGS="--build=x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu \
                 $(use_enable perftools) \
                 $(use_with network-isolator) \
@@ -44,7 +44,6 @@ src_configure() {
         if use network-isolator; then
                 MESOS_CONF_ARGS="${MESOS_CONF_ARGS} --with-nl=${MESOS_LIB_PREFIX}"
         fi
-        ewarn "$(set)"
         econf ${MESOS_CONF_ARGS}
 }
 
