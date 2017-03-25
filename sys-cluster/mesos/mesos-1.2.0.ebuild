@@ -39,8 +39,6 @@ src_configure() {
                 --enable-optimize \
                 --with-apr=${MESOS_LIB_PREFIX} \
                 --with-curl=${MESOS_LIB_PREFIX} \
-                --with-nl=${MESOS_LIB_PREFIX} \
-                --with-protobuf=${MESOS_LIB_PREFIX} \
                 --with-sasl=${MESOS_LIB_PREFIX} \
                 --with-svn=${MESOS_LIB_PREFIX}"
         if use network-isolator; then
