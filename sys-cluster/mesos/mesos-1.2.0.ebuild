@@ -44,6 +44,7 @@ src_configure() {
         if use network-isolator; then
                 MESOS_CONF_ARGS="${MESOS_CONF_ARGS} --with-nl=${MESOS_LIB_PREFIX}"
         fi
+        ewarn "$(set)"
         econf ${MESOS_CONF_ARGS}
 }
 
