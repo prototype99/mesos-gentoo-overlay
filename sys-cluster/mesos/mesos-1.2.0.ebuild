@@ -23,6 +23,7 @@ RDEPEND=">=dev-libs/apr-1.5.2
 DEPEND=$RDEPEND
 
 src_prepare() {
+        epatch "${FILESDIR}/mesos-stout-cloexec.patch"
         eautoreconf
 }
 
