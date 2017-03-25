@@ -16,12 +16,12 @@ KEYWORDS="~amd64 ~x86"
 IUSE="network-isolator perftools"
 SLOT="0"
 
-RDEPEND="dev-libs/apr
-        net-misc/curl
-        dev-cpp/glog
-        dev-libs/libev
+RDEPEND=">=dev-libs/apr-1.5.2
+        >=net-misc/curl-7.43.0
+        >=dev-cpp/glog-0.3.3
+        >=dev-libs/libev-4.22
         network-isolator? ( dev-libs/libnl )
-        dev-libs/protobuf
+        >=dev-libs/protobuf-2.6.1
         dev-libs/cyrus-sasl
         dev-vcs/subversion"
 DEPEND=$RDEPEND
