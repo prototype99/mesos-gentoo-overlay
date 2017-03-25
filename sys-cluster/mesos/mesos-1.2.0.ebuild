@@ -17,10 +17,7 @@ SLOT="0"
 
 RDEPEND=">=dev-libs/apr-1.5.2
         >=net-misc/curl-7.43.0
-        >=dev-cpp/glog-0.3.3
-        >=dev-libs/libev-4.22
         network-isolator? ( dev-libs/libnl )
-        >=dev-libs/protobuf-2.6.1
         dev-libs/cyrus-sasl
         dev-vcs/subversion"
 DEPEND=$RDEPEND
@@ -33,20 +30,23 @@ src_configure() {
         # See https://www.mail-archive.com/user@mesos.apache.org/msg04222.html
         export SASL_PATH=/build/amd64-usr/usr/lib/sasl2
         export LD_LIBRARY_PATH=/build/amd64-usr/usr/lib:$LD_LIBRARY_PATH
-        econf --build=x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu \
+        MESOS_LIB_PREFIX="/build/amd64-usr/usr"
+        MESOS_CONF_ARGS="--build=x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu \
                 $(use_enable perftools) \
                 $(use_with network-isolator) \
                 --disable-python \
                 --disable-java \
                 --enable-optimize \
-                --with-apr=/build/amd64-usr/usr \
-                --with-curl=/build/amd64-usr/usr \
-                --with-glog=/build/amd64-usr/usr \
-                --with-libev=/build/amd64-usr/usr \
-                --with-nl=/build/amd64-usr/usr \
-                --with-protobuf=/build/amd64-usr/usr \
-                --with-sasl=/build/amd64-usr/usr \
-                --with-svn=/build/amd64-usr/usr
+                --with-apr=${MESOS_LIB_PREFIX} \
+                --with-curl=${MESOS_LIB_PREFIX} \
+                --with-nl=${MESOS_LIB_PREFIX} \
+                --with-protobuf=${MESOS_LIB_PREFIX} \
+                --with-sasl=${MESOS_LIB_PREFIX} \
+                --with-svn=${MESOS_LIB_PREFIX}"
+        if use network-isolator; then
+                MESOS_CONF_ARGS="${MESOS_CONF_ARGS} --with-nl=${MESOS_LIB_PREFIX}"
+        fi
+        econf ${MESOS_CONF_ARGS}
 }
 
 src_compile() {
