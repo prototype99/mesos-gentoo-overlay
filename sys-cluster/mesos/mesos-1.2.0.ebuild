@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit autotools
+inherit autotools eutils
 
 DESCRIPTION="A cluster manager that provides efficient resource isolation and sharing across distributed applications"
 HOMEPAGE="http://mesos.apache.org/"
