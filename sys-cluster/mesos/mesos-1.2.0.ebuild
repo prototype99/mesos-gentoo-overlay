@@ -19,10 +19,8 @@ SLOT="0"
 RDEPEND="dev-libs/apr
         net-misc/curl
         dev-cpp/glog
-        dev-libs/leveldb
         dev-libs/libev
         network-isolator? ( dev-libs/libnl )
-        dev-cpp/picojson
         dev-libs/protobuf
         dev-libs/cyrus-sasl
         dev-vcs/subversion"
@@ -46,9 +44,7 @@ src_configure() {
                 --with-curl=/build/amd64-usr/usr \
                 --with-glog=/build/amd64-usr/usr \
                 --with-libev=/build/amd64-usr/usr \
-                --with-leveldb=/build/amd64-usr/usr \
                 --with-nl=/build/amd64-usr/usr \
-                --with-picojson=/build/amd64-usr/usr \
                 --with-protobuf=/build/amd64-usr/usr \
                 --with-sasl=/build/amd64-usr/usr \
                 --with-svn=/build/amd64-usr/usr
