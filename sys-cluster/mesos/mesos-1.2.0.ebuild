@@ -30,7 +30,7 @@ src_configure() {
         # See https://www.mail-archive.com/user@mesos.apache.org/msg04222.html
         export SASL_PATH=/build/amd64-usr/usr/lib/sasl2
         export LD_LIBRARY_PATH=/build/amd64-usr/usr/lib:$LD_LIBRARY_PATH
-        MESOS_LIB_PREFIX="/build/amd64-usr/usr"
+        MESOS_LIB_PREFIX="${DISTDIR}/usr"
         MESOS_CONF_ARGS="--build=x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu \
                 $(use_enable perftools) \
                 $(use_with network-isolator) \
