@@ -1,12 +1,14 @@
 diff --git a/3rdparty/stout/include/stout/os/open.hpp b/3rdparty/stout/include/stout/os/open.hpp
-index ceff89f..4a8c6fc 100644
+index ceff89f..d9bb17c 100644
 --- a/3rdparty/stout/include/stout/os/open.hpp
 +++ b/3rdparty/stout/include/stout/os/open.hpp
-@@ -13,6 +13,8 @@
- #ifndef __STOUT_OS_OPEN_HPP__
- #define __STOUT_OS_OPEN_HPP__
-
+@@ -38,8 +38,7 @@
+ // Copied from '/usr/include/sys/fcntl.h'
+ #define O_CLOEXEC 0x1000000
+ #elif defined(__linux__)
+-// Copied from '/usr/include/asm-generic/fcntl.h'.
+-#define O_CLOEXEC 02000000
 +#include <asm-generic/fcntl.h>
-+
- #include <sys/stat.h>
- #include <sys/types.h>
+ #elif defined(__sun)
+ // Not defined on Solaris, taking a spare flag.
+ #define O_CLOEXEC 0x1000000
