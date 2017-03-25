@@ -4,11 +4,19 @@ This overlay contains a WORK IN PROGRESS for some items I've been missing in the
 ## Installation - CoreOS
 Follow the instructions on [Modifying CoreOS](https://coreos.com/os/docs/latest/sdk-modifying-coreos.html) to create your basic `chroot` evironment. Once you have your basic build system functioning to where you could build an image, you now need to use this overlay to install packages. 
 
+In all examples below, `${THIS_OVERLAY_DIR}` refers to the directory **INSIDE THE CORK ENVIRONMENT** where you have checked out this repository.
+
+### Installing into existing packaged environment
+Mesos can be installed using the `emerge` command specific for the board you are building for. Below is an example of using one for an `amd64-usr` board.
+
+```
+PORTDIR_OVERLAY="${PORTDIR_OVERLAY} ${THIS_OVERLAY_DIR}" ACCEPT_KEYWORDS="~amd64" emerge-amd64-usr -D =sys-cluster/mesos-1.2.0
+```
 ### Generating New Manifest Entries
 To generate new manifest entries from within a `cork` use the following command
 
 ```
-ebuild-amd64-usr ${THIS_REPOSITORY_DIR}/sys-cluster/mesos/mesos-${MESOS_VERSION}.ebuild manifest
+ebuild-amd64-usr ${THIS_OVERLAY_DIR}/sys-cluster/mesos/mesos-${MESOS_VERSION}.ebuild manifest
 ```
 
 # Packages
