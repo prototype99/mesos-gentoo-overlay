@@ -5,7 +5,7 @@
 EAPI=5
 inherit git-2 autotools eutils
 
-EGIT_REPO_URI="https://github.com/drcrallen/mesos.git"
+EGIT_REPO_URI="git://git.apache.org/mesos.git"
 
 DESCRIPTION="a cluster manager that provides efficient resource isolation and sharing across distributed applications"
 HOMEPAGE="http://mesos.apache.org/"
