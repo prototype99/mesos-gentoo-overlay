@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 inherit git-2 autotools eutils
 
 EGIT_REPO_URI="git://git.apache.org/mesos.git"
