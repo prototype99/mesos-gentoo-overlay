@@ -30,13 +30,14 @@ src_prepare() {
 
 src_configure() {
         # See https://issues.apache.org/jira/browse/MESOS-7286
-        MESOS_LIB_PREFIX="${EROOT}/usr"
+        MESOS_LIB_PREFIX="${EPREFIX}/usr"
         export SASL_PATH="${MESOS_LIB_PREFIX}/lib/sasl2"
         export LD_LIBRARY_PATH="${MESOS_LIB_PREFIX}/lib:$LD_LIBRARY_PATH"
-        MESOS_CONF_ARGS="--build=x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu \
+        econf --build=x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu \
                 $(use_enable perftools) \
                 $(use_enable install-module-dependencies) \
                 $(use_with network-isolator) \
+                $(use_with network-isolator nl "${MESOS_LIB_PREFIX}") \
                 --disable-python \
                 --disable-java \
                 --enable-optimize \
@@ -44,11 +45,7 @@ src_configure() {
                 --with-apr=${MESOS_LIB_PREFIX} \
                 --with-curl=${MESOS_LIB_PREFIX} \
                 --with-sasl=${MESOS_LIB_PREFIX} \
-                --with-svn=${MESOS_LIB_PREFIX}"
-        if use network-isolator; then
-                MESOS_CONF_ARGS="${MESOS_CONF_ARGS} --with-nl=${MESOS_LIB_PREFIX}"
-        fi
-        econf ${MESOS_CONF_ARGS}
+                --with-svn=${MESOS_LIB_PREFIX}
 }
 
 src_compile() {
