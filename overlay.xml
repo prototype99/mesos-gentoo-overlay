@@ -9,9 +9,9 @@
       <email>charles@allen-net.com</email>
       <name>Charles Allen</name>
     </owner>
-    <source type="git">https://github.com/drcrallen/drcrallen-overlay.git</source>
-    <source type="git">git@github.com:drcrallen/drcrallen-overlay.git</source>
-    <feed>https://github.com/drcrallen/drcrallen-overlay/commits/master.atom</feed>
+    <source type="git">https://github.com/prototype99/mesos-gentoo-overlay.git</source>
+    <source type="git">git@github.com:prototype99/mesos-gentoo-overlay.git</source>
+    <feed>https://github.com/prototype99/mesos-gentoo-overlay/commits/master.atom</feed>
   </repo>
 </repositories>
 
